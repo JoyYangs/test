@@ -1,12 +1,13 @@
 <template>
 	<div class="tab-bar-item" @click="itemClick">
-		<div>
+		<div v-if="!isSelect">
 			<slot name="normal"></slot>
 		</div>
-		<div>
+		<div v-else>
 			<slot name="selected"></slot>
 		</div>
-		<div>
+		<!-- style use computed to get -->
+		<div :style="activeStyle">
 			<slot name="text"></slot>
 		</div>
 	</div>
@@ -15,9 +16,31 @@
 <script>
 	export default {
 		name: "TabBarItem",
+		props: {
+			path: String,
+			selectedColor: {
+				type : String,
+				default() {
+					return "deeppink"
+				}
+			}
+		},
+		data() {
+			return {
+				
+			}
+		}, 
+		computed: {
+			isSelect() {
+				return this.$route.path.indexOf(this.path) != -1
+			}, 
+			activeStyle() {
+				return this.isSelect ? {color: this.selectedColor} : {}
+			}
+		},
 		methods: {
 			itemClick() {
-				console.log("itemClick")
+				this.$router.replace(this.path)
 			}
 		}
 	}

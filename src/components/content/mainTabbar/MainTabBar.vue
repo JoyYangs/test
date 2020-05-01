@@ -1,9 +1,10 @@
 <template>
 	<div>
 		<tab-bar>
-			<tab-bar-item v-for="item in items">
-				<div slot="normal"></div>
-				<div slot="selected"></div>
+			<tab-bar-item v-for="item in items" :selectedColor="item.selColor" :path="item.path" :key="item.path">
+				<!-- <img slot="normal" src="" alt="">
+				<img slot="selected" src="" alt=""> -->
+				<!-- 加入img之后就把item的line-height和height注释了 -->
 				<div slot="text">{{item.text}}</div>
 			</tab-bar-item>
 		</tab-bar>
@@ -26,19 +27,27 @@
 				items: [{
 						text: "首页",
 						image: "",
-						selImage: "" 
+						selImage: "",
+						selColor: "deeppink",
+						path: "/home"
 					}, {
 						text: "分类",
 						image: "",
-						selImage: "" 
+						selImage: "",
+						selColor: "blue",
+						path: "/category"
 					}, {
 						text: "购物车",
 						image: "",
-						selImage: "" 
+						selImage: "",
+						selColor: "yellow",
+						path: "/cart"
 					},{
 						text: "我的",
 						image: "",
-						selImage: ""
+						selImage: "",
+						selColor: "aqua",
+						path: "/mine"
 					}
 				]
 			}
