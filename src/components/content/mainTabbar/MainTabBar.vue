@@ -11,7 +11,9 @@
 </template>
 
 <script>
-	import { TabBar, TabBarItem } from '../../common/tabbar/index'
+	import { TabBar, TabBarItem } from '../../common/tabbar/'
+	// import TabBar from '../../common/tabbar/TabBar'
+	// import TabBarItem from '../../common/tabbar/TabBarItem'
 
 	export default {
 		name: "MainTabBar",

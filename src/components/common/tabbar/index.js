@@ -1,7 +1,9 @@
 import TabBar from './TabBar'
 import TabBarItem from './TabBarItem'
 
-export default {
+// 这里没有default。。。。。。
+// sb了......
+export {
 	TabBar,
 	TabBarItem
 }
