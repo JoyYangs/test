@@ -1,4 +1,5 @@
 # mall-for-vue
+## change branch to dev to see the detail implements about this pro
 
 ## Project setup
 ```
