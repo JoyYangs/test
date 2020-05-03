@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> promise-all的使用 </title>
+</head>
+<body>
+	
+	<script>
+		Promise.all([
+			new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve('请求1的返回结果')
+				}, 3000)
+			}),
+			new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve('我是请求2的结果')
+					// reject('请求2出错了~~~~')
+				}, 1000)
+				// 如果请求2自己实现了.then()对返回结果做了处理，results里面就会没有这个数据了
+			}).catch(err => {
+				console.log(err + ' 内部处理')
+			})
+		]).then(results => {
+			console.log(results)
+		}).catch(error => {
+			// 这里的报错是谁先返回出错了就会处理谁，其他比较慢的请求的报错就不会被在这里处理了
+			console.log(error)
+		})
+
+		// 总结：
+		// 只要是对于Promise.all()里面的请求做了单独的处理就会导致最终的results里面没有这个请求对应的数据
+	</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>promise的使用</title>
+</head>
+<body>
+	<script>
+		new Promise((resolve, reject) => {
+			// 使用settimeout来模拟网络请求延时操作
+			setTimeout(() => {
+				resolve('请求成功的返回数据')
+			}, 1000)
+		}).then(res => {
+			console.log(res)
+			// 对数据做一些处理
+			// 这里可以继续链式发起第二个请求
+			const resData = '我是第二次请求的结果'
+
+			// 编号①
+			// 这里也可以再简写为 return res + resData
+			return Promise.resolve(res + resData)			
+		}, err => {
+			console.log(err)
+		}).then(res => {
+			// 这里输出的是编号①的内容
+			console.log(res)
+			// 处理数据
+
+			// 继续请求操作
+			// 编号②
+			return Promise.reject(res + ' 这个数据经过处理后的请求发生了错误')
+		}).then(res => {
+			// 对编号②的处理
+			console.log(res)
+		}, err => {
+			// 对编号②的异常处理
+			console.log(err)
+		})
+
+/* promise的三种状态：
+pending
+fulfill
+reject 
+*/
+
+new Promise((resolve, reject) => {
+	setTimeout(() => {
+		// 成功时候回调resolve()
+		// 失败时候调用reject()
+	}, 1000)
+}).then(data => {
+	// 上面异步处理最终回调resolve()的话就会来到这里
+}).catch(err => {
+	// 上面异步处理最终回调reject()的话就会来到这里
+})
+
+// .then(a,b)支持两个参数，
+// 前一个为成功的回调的后续处理
+// 后一个为失败回调的后续处理
+new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve()
+		reject()
+	}, 1000)
+}).then(res => {
+	// 上面异步处理最终回调resolve()的话就会来到这里
+}, err => {
+	// 上面异步处理最终回调reject()的话就会来到这里
+})
+
+new Promise((resolve, reject) => {
+	// 发送第一个网络请求
+	setTimeout(() => {
+		const someData = //
+		resolve(someData)
+	}, 1000)
+}).then(res => {
+	// 拿到第一次请求的结果之后的处理代码
+	// 数据解析之类的。。。
+	console.log(res)
+
+	// 发起第二个网络请求 reject 参数可选
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve()
+		}, 1000)
+	})
+}).then(res => {
+	// 拿到第2次请求的结果之后的处理代码
+	// 数据解析之类的。。。
+	console.log(res)
+
+	// 发起第3个网络请求
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve()
+		}, 1000)
+	})
+}).then(res => {
+	// 第3次请求的处理结果
+}, err => {
+	// 第3次请求的处理结果
+})
+
+
+// 有error就用catch
+// promise的简写方法：
+new Promise(resolve => {
+	console.log("发起网络请求。。。。")
+	setTimeout(() => {
+		resolve(res)
+	}, 1000)
+}).then(res => {
+	console.log("拿到了请求数据")
+	// 对上面的res进行处理返回一个新的数据结果
+	return Promise.resolve(res + '第一次请求的数据拼接')
+}).then(res => {
+	console.log("第二次数据处理")
+	// 如果这里抛出了异常就会去catch里面执行
+	return Promise.reject('error msg')
+
+	// 或者直接写throw 'error msg' 也可以
+}).then(res => {
+	console.log(res, '第三次数据处理')
+	// 这个也是简写，直接将操作数据返回，Promise内部会自己包装为resolve类型
+	return res + '第三次数据处理'
+}).catch(error => {
+	console.log("error")
+})
+	</script>
+</body>
+</html>
