@@ -40,7 +40,7 @@
 						text: "购物车",
 						image: "",
 						selImage: "",
-						selColor: "yellow",
+						selColor: "green",
 						path: "/cart"
 					},{
 						text: "我的",
