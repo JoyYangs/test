@@ -30,12 +30,12 @@ module.exports = {
 			proxy: {
 					 //配置跨域
 					 '/api': {
-							 target: 'http://zb.txdou.com', //test
+							 target: 'http://localhost:8080', //test
 							 ws: true,// 是否启用websockets
 							 changeOrigin: true, //是否開啟代理
-							 pathRewrite: {
-									'^/api': ''
-							 }
+							//  pathRewrite: {
+							// 		'^/api': '/static/mock/'
+							//  }
 					 }
 			
 			 },

@@ -7,14 +7,25 @@
 		<div><button @click="addAsyncCounterDefaultNum10()">异步默认加10</button></div>
 		<div><button @click="addAsyncCounter5(5)">异步手动指定+5</button></div>
 		<div><button @click="subAsyncCounter">异步固定-1</button></div>
+
+		<!-- <swiper-example-pagination></swiper-example-pagination> -->
+		<button @click="getTestInfo">get info</button>
 	</div>
 </template>
 
 <script>
 	
 	import { mapActions, mapMutations } from 'vuex'
+	import { getHomeData, getInfo } from '../../network/home'
+	import swiperExamplePagination from './SwiperTest'
+	import Axios from 'axios'
+
+
 	export default {
 		name: "Home",
+		components: {
+			swiperExamplePagination
+		},
 		// methods: {
 		// 	addCounter() {
 		// 		// 触发store里面的方法,用commit
@@ -47,7 +58,32 @@
 			...mapMutations({
 				addCounter: 'incrementCounter',
 				subCounter: 'decrementCounter'
-			})
+			}),
+			getTestInfo() {
+				getInfo().then(res => {
+					console.log(res)
+				}).catch(error => {
+				
+					console.log(error)
+				})
+				// console.log("getinfo-----")
+				// Axios.post('/api/getInfo', {
+				// 	"name": "new name",
+				// 	"age": 26
+				// }).then(res => {
+				// 	console.log(res)
+				// }).catch(error => {
+				// 	console.log(error)
+				// })
+			}
+		},
+		created() {
+			// 发送请求
+			// getHomeData().then(res => {
+			// 	console.log(res);
+			// }).catch(err => {
+			// 	console.log(err);
+			// })
 		}
 	}
 

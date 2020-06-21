@@ -2,28 +2,28 @@ import axios from 'axios'
 
 export function request(config) {
 	const instance = axios.create({
-		baseURL: "",
+		baseURL: "http://localhost:8080",
 		timeout: 3000
 	})
 
 	// 请求和响应 拦截
-	instance.interceptors.request.use(config => {
-		// 请求成功时候来到这里
-		console.log(config)
-		// 这里必须要把config return回去吗，不然就请求失败了
-		return config
-	}, err => {
-		// 请求失败的时候来到这里
-		console.log(err)
-	})
+	// instance.interceptors.request.use(config => {
+	// 	// 请求成功时候来到这里
+	// 	console.log(config)
+	// 	// 这里必须要把config return回去吗，不然就请求失败了
+	// 	return config
+	// }, err => {
+	// 	// 请求失败的时候来到这里
+	// 	console.log(err)
+	// })
 
-	instance.interceptors.response.use(res => {
-		// 响应成功的时候来到这里
-		console.log(res)
-		return res
-	}, err => {
-		console.log("响应失败的时候来到这里")
-	})
+	// instance.interceptors.response.use(res => {
+	// 	// 响应成功的时候来到这里
+	// 	console.log(res)
+	// 	return res
+	// }, err => {
+	// 	console.log("响应失败的时候来到这里")
+	// })
 
 	return instance(config)
 }

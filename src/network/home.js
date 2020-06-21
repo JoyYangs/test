@@ -1,12 +1,29 @@
 import { request } from './request'
 
 // if there are some params, just send as function params
+// export function getHomeData() {
+// 	return request({
+// 		url: "/api/test.json",
+// 		param: {
+
+// 		}
+// 	})
+// }
+
 export function getHomeData() {
 	return request({
-		url: "",
-		param: {
+		url: "/api/test.json"
+	})
+}
 
-		}
+export function getInfo() {
+	return request({
+		url: "/api/getInfo",
+		data: {
+			"name": "test-name",
+			"age": 24
+		},
+		method: "post"
 	})
 }
 
